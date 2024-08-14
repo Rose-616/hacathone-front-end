@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <div className="flex flex-col p-4 space-y-6">
-      {/* Announcement Button */}
+      {/* Announcement Buttons*/}
       <div style={{ padding: '1rem', textAlign: 'center' }}>
         <Button 
           variant="contained" 
