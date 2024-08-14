@@ -8,7 +8,7 @@ function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate 
   const loginUser = async (loginData) => {
     try {
       setIsLoadingLocal(true);
-      const response = await fetch('/api/v1/users/login', {
+      const response = await fetch('https://hacathone-backend.vercel.app/api/v1/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginData),
