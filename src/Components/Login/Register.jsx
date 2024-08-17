@@ -18,7 +18,7 @@ function Register({ setFormAction, setShowAdditionalFields, setIsLoading, naviga
         formData.append('profilePic', profilePic);
       }
 
-      const response = await fetch('/api/v1/users/register', {
+      const response = await fetch('https://hacathone-backend.vercel.app/api/v1/users/register', {
         method: 'POST',
         body: formData,
       });

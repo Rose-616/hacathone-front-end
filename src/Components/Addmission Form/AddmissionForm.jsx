@@ -72,7 +72,7 @@ const AdmissionForm = () => {
     }
 
     try {
-      const response = await fetch('/api/v1/users/course', {
+      const response = await fetch('https://hacathone-backend.vercel.app/api/v1/users/course', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

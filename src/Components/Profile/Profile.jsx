@@ -15,7 +15,7 @@ const Profile = () => {
       try {
         const accessToken = getCookie('myAccessToken'); // Get the access token from cookies
 
-        const response = await fetch('/api/v1/users/profile', {
+        const response = await fetch('https://hacathone-backend.vercel.app/api/v1/users/profile', {
           headers: {
             Authorization: `Bearer ${accessToken}`, // Include the access token in the headers
           },
