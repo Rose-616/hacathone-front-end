@@ -9,7 +9,7 @@ export default defineConfig({
 
   server: {
     proxy: {
-      '/api': 'https://hacathone-backend.vercel.app/',
+      // '/api': 'https://hacathone-backend.vercel.app/',
       // '/api': 'https://vercel-project-backend.vercel.app',
     },
     host: '0.0.0.0',
