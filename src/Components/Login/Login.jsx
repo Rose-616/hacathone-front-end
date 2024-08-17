@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { PropagateLoader } from 'react-spinners';
+import Cookies from 'js-cookie';
 
 function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate }) {
   const [isLoading, setIsLoadingLocal] = useState(false);
@@ -14,14 +15,15 @@ function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate 
         body: JSON.stringify(loginData),
       });
       const data = await response.json();
+  
       if (response.ok) {
         const { accessToken, refreshToken } = data;
-      
-        // Save tokens to localStorage
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);}
-      if (response.ok) {
-        setIsLoadingLocal(false);
+  
+        // Set cookies for tokens with appropriate options
+        document.cookie = `accessToken=${accessToken}; max-age=${7 * 24 * 60 * 60}; path=/; secure; samesite=None`;
+        document.cookie = `refreshToken=${refreshToken}; max-age=${7 * 24 * 60 * 60}; path=/; secure; samesite=None`;
+  
+        // Show success message and navigate to the homepage
         Swal.fire({
           position: 'top',
           icon: 'success',
@@ -32,6 +34,7 @@ function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate 
         });
         navigate('/home');
       } else {
+        // Handle failed login (e.g., display error message)
         console.error('Login failed:', data.error);
         Swal.fire({
           icon: 'error',
@@ -47,6 +50,7 @@ function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate 
       setIsLoadingLocal(false);
     }
   };
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
