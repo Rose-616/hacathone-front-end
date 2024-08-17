@@ -14,7 +14,12 @@ function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate 
         body: JSON.stringify(loginData),
       });
       const data = await response.json();
-
+      if (response.ok) {
+        const { accessToken, refreshToken } = data;
+      
+        // Save tokens to localStorage
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);}
       if (response.ok) {
         setIsLoadingLocal(false);
         Swal.fire({
