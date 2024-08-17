@@ -53,6 +53,12 @@ function Sidebar() {
   };
 
 
+
+  // Function to handle logout
+  const handleLogout = () => {
+    clearCookies(); // Clear cookies
+    navigate('/'); // Redirect to the login or homepage
+  };
   return (
     // style={{ border: '5px solid red' }}
     <div className="flex h-screen overflow-hidden" >
