@@ -13,7 +13,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const accessToken = getCookie('myAccessToken'); // Get the access token from cookies
+        const accessToken = getCookie('accessToken'); // Get the access token from cookies
 
         const response = await fetch('https://hacathone-backend.vercel.app/api/v1/users/profile', {
           headers: {
