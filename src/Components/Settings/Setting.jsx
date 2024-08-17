@@ -27,7 +27,7 @@ const Setting = () => {
     setError('');
     setSuccess('');
 
-    const accessToken = getCookie('myAccessToken');
+    const accessToken = getCookie('accessToken');
     if (!accessToken) {
       return setError('Access token is missing. Please log in again.');
     }
@@ -37,7 +37,7 @@ const Setting = () => {
         return setError('New email is required.');
       }
       try {
-        const response = await fetch('/api/v1/users/update-email', {
+        const response = await fetch('https://hacathone-backend.vercel.app/api/v1/users/update-email', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const Setting = () => {
       }
 
       try {
-        const response = await fetch('/api/v1/users/update-password', {
+        const response = await fetch('https://hacathone-backend.vercel.app/api/v1/users/update-password', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
