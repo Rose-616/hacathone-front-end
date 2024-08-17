@@ -16,7 +16,7 @@ function Sidebar() {
     // Function to fetch user data from the backend
     const fetchUserData = async () => {
       try {
-        const accessToken = getCookie('myAccessToken'); // Get the access token from cookies
+        const accessToken = getCookie('accessToken'); // Get the access token from cookies
 
         const response = await fetch('/api/v1/users/profile', {
           headers: {
