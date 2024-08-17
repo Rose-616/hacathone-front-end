@@ -12,6 +12,12 @@ function Sidebar() {
     if (parts.length === 2) return parts.pop().split(';').shift();
   };
 
+
+  const clearCookies = () => {
+    document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  };
+
   useEffect(() => {
     // Function to fetch user data from the backend
     const fetchUserData = async () => {
@@ -95,10 +101,14 @@ function Sidebar() {
                 Settings
               </Link>
             </li>
+            
             <li>
-              <Link to="/" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded">
+              {/* <Link to="/" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded">
                 Logout
-              </Link>
+              </Link> */}
+              <button onClick={handleLogout} className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded">
+                Logout
+              </button>
             </li>
           </ul>
         </nav>
