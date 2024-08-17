@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [userData, setUserData] = useState(null);
-
+  const navigate = useNavigate();
   // Function to get the value of a specific cookie
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
