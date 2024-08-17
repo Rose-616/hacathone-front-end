@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { PropagateLoader } from 'react-spinners';
-import Cookies from 'js-cookie';
+
 
 function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate }) {
   const [isLoading, setIsLoadingLocal] = useState(false);
