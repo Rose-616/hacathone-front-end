@@ -42,7 +42,7 @@ function Register({ setFormAction, setShowAdditionalFields, setIsLoading, naviga
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate('/home');
+        navigate('/');
       } else {
         const errorMessage = data.error?.message || 'An error occurred while registering. Please try again.';
         console.error('Registration failed:', errorMessage);
