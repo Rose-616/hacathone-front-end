@@ -5,27 +5,35 @@ import { PropagateLoader } from 'react-spinners';
 function Register({ setFormAction, setShowAdditionalFields, setIsLoading, navigate }) {
   const [isLoading, setIsLoadingLocal] = useState(false);
   const [profilePic, setProfilePic] = useState(null);
-
   const registerUser = async (registerData) => {
     try {
       setIsLoadingLocal(true);
       const formData = new FormData();
-      formData.append('userName', registerData.userName);
+      formData.append('username', registerData.username);
       formData.append('email', registerData.email);
       formData.append('password', registerData.password);
       formData.append('confirmPassword', registerData.confirmPassword);
       if (profilePic) {
-        formData.append('profilePic', profilePic);
+        formData.append('avatar', profilePic);
       }
-
+  
       const response = await fetch('https://hacathone-backend.vercel.app/api/v1/users/register', {
         method: 'POST',
         body: formData,
+        headers: {
+          'Accept': 'application/json',
+        },
       });
+  
+      // Check if the response is JSON
+      const contentType = response.headers.get('Content-Type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server response is not JSON');
+      }
+  
       const data = await response.json();
-
+  
       if (response.ok) {
-        setIsLoadingLocal(false);
         Swal.fire({
           position: 'top',
           icon: 'success',
@@ -36,17 +44,26 @@ function Register({ setFormAction, setShowAdditionalFields, setIsLoading, naviga
         });
         navigate('/home');
       } else {
-        console.error('Registration failed:', data.error);
+        const errorMessage = data.error?.message || 'An error occurred while registering. Please try again.';
+        console.error('Registration failed:', errorMessage);
         Swal.fire({
           icon: 'error',
           title: 'Registration Failed',
-          text: data.error.message || 'An error occurred while registering. Please try again.',
+          text: errorMessage,
           showConfirmButton: false,
           timer: 1500,
         });
       }
     } catch (error) {
-      console.error('Error:', error);
+      const errorMessage = error.message || 'An unexpected error occurred. Please try again later.';
+      console.error('Error:', errorMessage);
+      Swal.fire({
+        icon: 'error',
+        title: 'Registration Error',
+        text: errorMessage,
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } finally {
       setIsLoadingLocal(false);
     }
@@ -76,7 +93,7 @@ function Register({ setFormAction, setShowAdditionalFields, setIsLoading, naviga
             Already have an account?{' '}
             <a
               onClick={() => {
-                setFormAction('/api/v1/users/login');
+                setFormAction('https://hacathone-backend.vercel.app/api/v1/users/login');
                 setShowAdditionalFields(false);
               }}
               href="#"
@@ -146,7 +163,7 @@ function Register({ setFormAction, setShowAdditionalFields, setIsLoading, naviga
             <input
               id="profilePic"
               type="file"
-              name="avatarc"
+              name="avatar" // Updated name to match formData
               accept="image/*"
               onChange={handleProfilePicChange}
               className="mt-1 block w-full border border-gray-300 rounded-md text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:border-0 file:bg-[#8CC63F] file:text-white hover:file:bg-[#7ABF4E]"
