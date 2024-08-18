@@ -75,7 +75,7 @@ function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate 
                 setFormAction('/api/v1/users/register');
                 setShowAdditionalFields(true);
               }}
-              href="#"
+              href="/register"
               className="font-semibold text-[#8CC63F] hover:underline"
             >
               Create a free account

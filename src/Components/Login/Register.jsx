@@ -42,7 +42,7 @@ function Register({ setFormAction, setShowAdditionalFields, setIsLoading, naviga
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate('/');
+        navigate('/login');
       } else {
         const errorMessage = data.error?.message || 'An error occurred while registering. Please try again.';
         console.error('Registration failed:', errorMessage);
@@ -96,7 +96,7 @@ function Register({ setFormAction, setShowAdditionalFields, setIsLoading, naviga
                 setFormAction('https://hacathone-backend.vercel.app/api/v1/users/login');
                 setShowAdditionalFields(false);
               }}
-              href="#"
+              href="/login"
               className="font-semibold text-[#8CC63F] hover:underline"
             >
               Login here
