@@ -96,7 +96,7 @@ function Register({ setFormAction, setShowAdditionalFields, setIsLoading, naviga
                 setFormAction('https://hacathone-backend.vercel.app/api/v1/users/login');
                 setShowAdditionalFields(false);
               }}
-              href="/login"
+              href="https://admissioportal.vercel.app/login"
               className="font-semibold text-[#8CC63F] hover:underline"
             >
               Login here
