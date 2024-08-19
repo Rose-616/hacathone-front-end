@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [userData, setUserData] = useState(null);
-  const navigate = useNavigate();
+
   // Function to get the value of a specific cookie
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
-  };
-
-
-  const clearCookies = () => {
-    document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    document.cookie = 'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   };
 
   useEffect(() => {
@@ -52,22 +46,13 @@ function Sidebar() {
     setIsOpen(!isOpen);
   };
 
-
-
-  // Function to handle logout
-  const handleLogout = () => {
-    clearCookies(); // Clear cookies
-    navigate('/'); // Redirect to the login or homepage
-  };
   return (
-    // style={{ border: '5px solid red' }}
-    <div className="flex h-screen overflow-hidden" >
+    <div className="flex h-screen overflow-hidden">
       {/* Sidebar */}
       <aside
         className={`w-full md:w-64 bg-gray-800 text-white flex flex-col md:transition-transform duration-500 ease-in-out transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
-        } fixed md:relative z-10`}
-        // style={{ border: '5px solid red' }}
+        } fixed md:relative z-20`}
       >
         <div className="flex justify-center mt-8 md:mt-8">
           <div className="relative">
@@ -89,53 +74,58 @@ function Sidebar() {
             </div>
           </div>
         </div>
-        {/* style={{ border: '5px solid red' }} */}
-        <nav className="mt-6 px-4 flex md:block flex-col items-center md:items-start " >
+        <nav className="mt-6 px-4 flex flex-col items-center md:items-start">
           <ul className="flex md:flex-col w-full justify-around">
-            <li>
-              <Link to="/home" className="block py-2 px-4 text-white hover:bg-gray-700 rounded">
+            <li className="w-full">
+              <Link to="/home" className="block py-2 px-4 text-white hover:bg-gray-700 rounded text-center">
                 Home
               </Link>
             </li>
-            <li>
-              <Link to="/home/profile" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded">
+            <li className="w-full">
+              <Link to="/home/profile" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded text-center">
                 Profile
               </Link>
             </li>
-            <li>
-              <Link to="/home/setting" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded">
+            <li className="w-full">
+              <Link to="/home/setting" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded text-center">
                 Settings
               </Link>
             </li>
-            
-            <li>
-              {/* <Link to="/" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded">
+            <li className="w-full">
+              <Link to="/" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded text-center">
                 Logout
-              </Link> */}
-              <button onClick={handleLogout} className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded">
-                Logout
-              </button>
+              </Link>
             </li>
+           
           </ul>
         </nav>
       </aside>
 
       {/* Hamburger Menu for Mobile */}
-      <div className="md:hidden flex items-center p-4 fixed z-20">
-        <button onClick={toggleSidebar} className={`text-${isOpen ? 'white' : 'black'} focus:outline-none`}>
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      <div className="md:hidden flex items-center p-4 fixed z-30">
+        <button
+          onClick={toggleSidebar}
+          className={`focus:outline-none ${isOpen ? 'text-white' : 'text-black'}`}
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
           </svg>
         </button>
       </div>
 
       {/* Overlay for Sidebar */}
       {isOpen && <div onClick={toggleSidebar} className="fixed inset-0 bg-black opacity-50 z-10 md:hidden"></div>}
-
-      {/* Main Content */}
-      {/* <main className="flex-1 bg-gray-100 p-8 md:ml-64">
-        {/* Your main content goes here */}
-      {/* </main> */}
     </div>
   );
 }
