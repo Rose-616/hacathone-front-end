@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import { PropagateLoader } from 'react-spinners';
 import { useNavigate } from 'react-router-dom';
 
-function Register({ setFormAction, setShowAdditionalFields, setIsLoading, navigate }) {
+function Register({ setFormAction, setShowAdditionalFields, setIsLoading }) {
   const navigate = useNavigate();
   const [isLoading, setIsLoadingLocal] = useState(false);
   const [profilePic, setProfilePic] = useState(null);
