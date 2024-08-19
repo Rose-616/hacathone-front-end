@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { PropagateLoader } from 'react-spinners';
 
-
 function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate }) {
   const [isLoading, setIsLoadingLocal] = useState(false);
-
+  const [isAdmin, setIsAdmin] = useState(false);
   const loginUser = async (loginData) => {
     try {
       setIsLoadingLocal(true);
@@ -15,15 +14,9 @@ function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate 
         body: JSON.stringify(loginData),
       });
       const data = await response.json();
-  
+
       if (response.ok) {
-        const { accessToken, refreshToken } = data;
-  
-        // Set cookies for tokens with appropriate options
-        document.cookie = `accessToken=${accessToken}; max-age=${7 * 24 * 60 * 60}; path=/; secure; samesite=None`;
-        document.cookie = `refreshToken=${refreshToken}; max-age=${7 * 24 * 60 * 60}; path=/; secure; samesite=None`;
-  
-        // Show success message and navigate to the homepage
+        setIsLoadingLocal(false);
         Swal.fire({
           position: 'top',
           icon: 'success',
@@ -33,8 +26,19 @@ function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate 
           timer: 1500,
         });
         navigate('/home');
-      } else {
-        // Handle failed login (e.g., display error message)
+        if (data.isAdmin === true) {
+          localStorage.setItem('isAdmin', 'true');
+          localStorage.setItem('isloggedin', 'true');
+          setIsLoggedin(true); // Set isAdmin to true in local storage
+          setIsAdmin(true); // Update state
+        } else {
+          localStorage.setItem('isAdmin', 'false')
+          localStorage.setItem('isloggedin', 'true'); // Set isAdmin to false in local storage
+          setIsLoggedin(true);
+          setIsAdmin(false); // Update state
+        }
+      }
+       else {
         console.error('Login failed:', data.error);
         Swal.fire({
           icon: 'error',
@@ -50,7 +54,6 @@ function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate 
       setIsLoadingLocal(false);
     }
   };
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -72,10 +75,10 @@ function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate 
             Don't have an account?{' '}
             <a
               onClick={() => {
-                setFormAction('/api/v1/users/register');
+                setFormAction('https://hacathone-backend.vercel.app/api/v1/users/register');
                 setShowAdditionalFields(true);
               }}
-              href="https://admissioportal.vercel.app/register"
+              href="/register"
               className="font-semibold text-[#8CC63F] hover:underline"
             >
               Create a free account
