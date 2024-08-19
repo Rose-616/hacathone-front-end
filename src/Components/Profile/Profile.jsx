@@ -64,7 +64,18 @@ const Profile = () => {
           <p className="text-xl text-gray-600 mb-2">
             <span className="font-semibold">Username:</span> {userData ? userData.username : 'Loading...'}
           </p>
-         
+          <p 
+              className={`text-xl mb-2 p-2 rounded ${
+                userData?.result === 'pass'
+                  ? 'text-green-600 bg-green-100'
+                  : userData?.result === 'fail'
+                  ? 'text-red-600 bg-red-100'
+                  : 'text-gray-600 bg-gray-100'
+              }`}
+            >
+              <span className="font-semibold">Result</span>{' '}
+              {userData ? userData.result : 'Loading...'}
+            </p>
         </div>
       </div>
     </div>
