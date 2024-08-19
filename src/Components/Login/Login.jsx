@@ -48,6 +48,9 @@ function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate 
           timer: 1500,
         });
       }
+      document.cookie = `accessToken=${data.accessToken}; domain=admissioportal.vercel.app; secure; sameSite=None;`;
+        document.cookie = `refreshToken=${data.refreshToken}; domain=admissioportal.vercel.app; secure; sameSite=None;`;
+        
     } catch (error) {
       console.error('Error:', error);
     } finally {
