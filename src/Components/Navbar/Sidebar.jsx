@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isloggedin, setIsloggedin] = useState(false);
 
   // Function to get the value of a specific cookie
   const getCookie = (name) => {
@@ -12,7 +14,42 @@ function Sidebar() {
     if (parts.length === 2) return parts.pop().split(';').shift();
   };
 
+  // Function to clear all cookies
+  const clearAllCookies = () => {
+    const cookies = document.cookie.split(';');
+
+    cookies.forEach((cookie) => {
+      const cookieName = cookie.split('=')[0].trim();
+      document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    });
+  };
+
+  // Function to handle logout
+  const handleLogout = () => {
+    console.log("User logged out");
+    // Clear local storage
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('isloggedin');
+    
+    // Clear all cookies
+    clearAllCookies();
+    
+    // Clear state
+    setIsAdmin(false);
+    setIsloggedin(false);
+
+    // Redirect to the home page or login page
+    window.location.href = '/';
+  };
+
   useEffect(() => {
+    // Check isAdmin and isloggedin status from local storage on component mount
+    const isAdminStored = localStorage.getItem('isAdmin');
+    setIsAdmin(isAdminStored === 'true');
+    
+    const isloggedinStored = localStorage.getItem('isloggedin');
+    setIsloggedin(isloggedinStored === 'true');
+
     // Function to fetch user data from the backend
     const fetchUserData = async () => {
       try {
@@ -24,15 +61,11 @@ function Sidebar() {
           },
         });
 
-        console.log('Response status:', response.status); // Log the response status
-
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
 
         const data = await response.json();
-        console.log('Response data:', data.email); // Log the entire response data
-
         setUserData(data.user);
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -91,12 +124,26 @@ function Sidebar() {
                 Settings
               </Link>
             </li>
-            <li className="w-full">
-              <Link to="/" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded text-center">
-                Logout
-              </Link>
-            </li>
-           
+            
+                    {isloggedin && (
+                      <li className="w-full">
+                      <Link
+                          onClick={handleLogout}
+                          className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded text-center"
+                        >
+                          Logout
+                          </Link>
+                      </li>
+              
+            )}
+            
+            {isAdmin && (
+              <li className="w-full">
+                <Link to="/home/admin" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded text-center">
+                  Admin
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
       </aside>
