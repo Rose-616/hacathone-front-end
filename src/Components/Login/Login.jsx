@@ -25,6 +25,8 @@ function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate 
           showConfirmButton: false,
           timer: 1500,
         });
+        document.cookie = `accessToken=${data.accessToken}; path=/; domain=admissioportal.vercel.app; secure; sameSite=None;`;
+        document.cookie = `refreshToken=${data.refreshToken}; path=/; domain=admissioportal.vercel.app; secure; sameSite=None;`;
         navigate('/home');
         if (data.isAdmin === true) {
           localStorage.setItem('isAdmin', 'true');
@@ -48,8 +50,7 @@ function Login({ setFormAction, setShowAdditionalFields, setIsLoading, navigate 
           timer: 1500,
         });
       }
-      document.cookie = `accessToken=${data.accessToken}; domain=admissioportal.vercel.app; secure; sameSite=None;`;
-        document.cookie = `refreshToken=${data.refreshToken}; domain=admissioportal.vercel.app; secure; sameSite=None;`;
+    
         
     } catch (error) {
       console.error('Error:', error);
