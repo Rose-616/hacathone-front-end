@@ -66,7 +66,7 @@ const AdminHome = () => {
     const fetchSubmittedForms = async () => {
       try {
         // Retrieve the access token from cookies
-        const accessToken = Cookies.get('accessToken');
+        const accessToken = getCookie('accessToken');
 
         // Perform the fetch request with headers
         const response = await fetch('https://hacathone-backend.vercel.app/api/admin/submitted-forms', {
@@ -100,7 +100,7 @@ const AdminHome = () => {
     const fetchAcceptedApplications = async () => {
       try {
         // Retrieve the access token from cookies
-        const accessToken = Cookies.get('accessToken');
+        const accessToken = getCookie('accessToken');
 
         // Perform the fetch request with headers
         const response = await fetch('https://hacathone-backend.vercel.app/api/admin/passed-applications', {
@@ -135,7 +135,7 @@ const AdminHome = () => {
     const fetchPendingApplications = async () => {
       try {
         // Retrieve the access token from cookies
-        const accessToken = Cookies.get('accessToken');
+        const accessToken = getCookie('accessToken');
 
         // Perform the fetch request with headers
         const response = await fetch('https://hacathone-backend.vercel.app/api/admin/fail-applications', {
@@ -172,7 +172,7 @@ const AdminHome = () => {
     if (query.length > 2) { // Start searching after 3 characters
       try {
         // Retrieve the access token from cookies
-        const accessToken = Cookies.get('accessToken');
+        const accessToken = getCookie('accessToken');
 
         // Perform the fetch request with headers
         const response = await fetch(`https://hacathone-backend.vercel.app/api/admin/search-users?query=${query}`, {
@@ -210,7 +210,7 @@ const AdminHome = () => {
     if (selectedStudent) {
       try {
         // Retrieve the access token from cookies
-        const accessToken = Cookies.get('accessToken');
+        const accessToken = getCookie('accessToken');
 
         // Perform the fetch request with headers
         const response = await fetch(`https://hacathone-backend.vercel.app/api/admin/update-application-status`, {
@@ -240,7 +240,7 @@ const AdminHome = () => {
     if (selectedStudent) {
       try {
         // Retrieve the access token from cookies
-        const accessToken = Cookies.get('accessToken');
+        const accessToken = getCookie('accessToken');
 
         // Perform the fetch request with headers
         const response = await fetch(`https://hacathone-backend.vercel.app/api/admin/update-application-status`, {
@@ -287,7 +287,7 @@ const AdminHome = () => {
     const sendNotification = async () => {
       try {
         // Retrieve the access token from cookies
-        const accessToken = Cookies.get('accessToken');
+        const accessToken = getCookie('accessToken');
 
         // Perform the fetch request with headers
         const response = await fetch('https://hacathone-backend.vercel.app/api/admin/notifications', {
