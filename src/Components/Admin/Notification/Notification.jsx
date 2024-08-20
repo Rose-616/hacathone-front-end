@@ -38,7 +38,7 @@ const Notification = () => {
     };
 
     fetchNotifications();
-  }, [accessToken]); // Add accessToken as a dependency if it might change
+  }, []); // Add accessToken as a dependency if it might change
 
   if (loading) return <p className="text-center py-4 text-blue-600">Loading...</p>;
 
