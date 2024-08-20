@@ -11,11 +11,11 @@ const Notification = () => {
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
   };
-  const accessToken = getCookie('accessToken');
+
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-    
+        const accessToken = getCookie('accessToken');
         const response = await fetch('https://hacathone-backend.vercel.app/api/v1/users/notifications', {
           method: 'GET',
           headers: {
