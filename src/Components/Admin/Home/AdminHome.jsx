@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
+
+
+const getCookie = (name) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+};
 const AdminHome = () => {
   // State to hold the dynamic numbers
   const [totalRegistrations, setTotalRegistrations] = useState(0);
