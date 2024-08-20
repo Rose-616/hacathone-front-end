@@ -7,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CampaignIcon from '@mui/icons-material/Campaign';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -26,7 +27,9 @@ const Home = () => {
     <div className="flex flex-col p-4 space-y-6">
       {/* Announcement Button */}
       <div style={{ padding: '1rem', textAlign: 'center' }}>
-        <Button 
+      <Button 
+        component={Link} // Use Link component as the Button's component
+        to="/home/notification"
           variant="contained" 
           color="primary" 
           startIcon={<CampaignIcon style={{ fontSize: '80px', transform: 'rotate(-30deg)' }} />} 
