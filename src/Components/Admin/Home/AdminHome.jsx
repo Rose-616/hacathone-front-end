@@ -34,7 +34,7 @@ const AdminHome = () => {
         const accessToken = getCookie('accessToken');
 
         // Perform the fetch request with headers
-        const response = await fetch('/api/admin/total-registrations', {
+        const response = await fetch('https://hacathone-backend.vercel.app/api/admin/total-registrations', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
