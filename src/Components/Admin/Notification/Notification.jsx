@@ -17,11 +17,9 @@ const Notification = () => {
       try {
         const accessToken = getCookie('accessToken');
         const response = await fetch('https://hacathone-backend.vercel.app/api/v1/users/notifications', {
-          method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}` // Add the access token here
-          }
+            Authorization: `Bearer ${accessToken}`, // Include the access token in the headers
+          },
         });
 
         if (response.ok) {
